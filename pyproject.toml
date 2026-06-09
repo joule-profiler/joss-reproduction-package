@@ -1,0 +1,24 @@
+[project]
+name = "joule-profiler-benchmarks"
+version = "0.1.0"
+description = "Joule profiler benchmarks project"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "altair>=6.0.0",
+    "marimo>=0.21.0",
+    "polars>=1.39.0",
+    "scipy>=1.17.1",
+    "statsmodels>=0.14.6",
+    "torch>=2.11.0",
+    "tqdm>=4.67.3",
+    "vegafusion>=2.0.3",
+    "vl-convert-python>=1.9.0.post1",
+]
+
+[tool.marimo.runtime]
+output_max_bytes = 120_000_000
+pythonpath = ["src"]
+
+[tool.uv.sources]
+lib = { path = "./src/lib" }
