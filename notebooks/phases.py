@@ -12,7 +12,7 @@ def _():
     import os
     import random
 
-    from lib import profiler_exec, alumet_exec, get_power_events, get_socket_cores, warmup
+    from lib import profiler_exec, get_power_events, get_socket_cores, warmup
 
     return (
         get_power_events,
@@ -30,7 +30,7 @@ def _():
 @app.cell
 def _(os):
     PROFILER_PATH = "joule-profiler"
-    RESULTS_DIR = "results_test"
+    RESULTS_DIR = "results"
     os.makedirs(RESULTS_DIR, exist_ok=True)
     SOCKET = 0
     return PROFILER_PATH, RESULTS_DIR
@@ -96,7 +96,7 @@ def _(
                     raise RuntimeError(f"Base exec error : {_err}")
 
             runs = [run_profiler, run_base]
-            # random.shuffle(runs)
+            random.shuffle(runs)
 
             for run in runs:
                 time.sleep(_delay)

@@ -10,15 +10,21 @@ dependencies = [
     "polars>=1.39.0",
     "scipy>=1.17.1",
     "statsmodels>=0.14.6",
-    "torch>=2.11.0",
+    "torch==2.4.0+cu118",
     "tqdm>=4.67.3",
     "vegafusion>=2.0.3",
     "vl-convert-python>=1.9.0.post1",
 ]
 
+[tool.uv.sources]
+torch = [
+  { index = "pytorch-cu118" }
+]
+
+[[tool.uv.index]]
+name = "pytorch-cu118"
+url = "https://download.pytorch.org/whl/cu118"
+explicit = true
+
 [tool.marimo.runtime]
 output_max_bytes = 120_000_000
-pythonpath = ["src"]
-
-[tool.uv.sources]
-lib = { path = "./src/lib" }
