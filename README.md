@@ -1,6 +1,6 @@
-# JOSS Dataset
+# JOSS reproduction package
 
-This repository contains the dataset and the scripts used for the JOSS (Journal of Open Source Software) paper "Joule Profiler: A phase-based energy measurement tool".
+This repository contains the dataset and the scripts used for the [JOSS](https://joss.theoj.org/) (Journal of Open Source Software) paper "Joule Profiler: A phase-based energy measurement tool".
 
 The Joule Profiler repository is available [here](https://github.com/joule-profiler/joule-profiler/).
 
@@ -14,7 +14,9 @@ Our experiments were conducted on the [Grid'5000](https://www.grid5000.fr/w/Grid
 
 ## Reproduce experiments
 
-If you want to reproduce the experiments, you need to install [Joule Profiler](https://github.com/joule-profiler/joule-profiler/), [Alumet](https://alumet.dev/) and [perf stat](https://man7.org/linux/man-pages/man1/perf-stat.1.html)
+If you want to reproduce the experiments, you need to install [Joule Profiler](https://github.com/joule-profiler/joule-profiler/) (v2.1.1), [Alumet](https://alumet.dev/) (v0.9.3) and [perf](https://man7.org/linux/man-pages/man1/perf-stat.1.html) (Linux kernel v6.12)
+
+You also need an Intel or AMD CPU with RAPL support and an Nvidia GPU supporting CUDA v11.8. 
 
 ### On Grid'5000
 
@@ -27,7 +29,7 @@ kadeploy3 -m {node} debian12-big
 
 We use debian12-big to have access to the NVIDIA open kernel modules and drivers pre-installed on the node.
 
-### Setup
+### Setup environment
 
 We are using [Nix](https://github.com/nixos/nix) to configure the reproducible environment.
 
