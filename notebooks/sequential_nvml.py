@@ -63,7 +63,7 @@ def _(
     tqdm,
     warmup,
 ):
-    _cmd = f"python3 programs/gpu.py 2000"
+    _cmd = f"python3 programs/gpu.py 200"
     _iterations = 2000
     _delay = 1
     _taskset = "2"

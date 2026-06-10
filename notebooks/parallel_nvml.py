@@ -68,7 +68,7 @@ def _(
     os.makedirs(f"{RESULTS_DIR}/parallel_nvml/joule-profiler", exist_ok=True)
     os.makedirs(f"{RESULTS_DIR}/parallel_nvml/alumet", exist_ok=True)
 
-    warmup(cmd="python3 programs/gpu.py 2000", taskset=_taskset, iter=10)
+    warmup(cmd="python3 programs/gpu.py 200", taskset=_taskset, iter=10)
 
     for _i in tqdm.tqdm(range(_iterations), delay=_delay):
         _alumet_out = os.path.join(RESULTS_DIR, "parallel_nvml", "alumet", f"iteration_{_i}.csv")
