@@ -14,20 +14,20 @@ Our experiments were conducted on the [Grid'5000](https://www.grid5000.fr/w/Grid
 
 ## Reproduce experiments
 
-If you want to reproduce the experiments, you need to install [Joule Profiler](https://github.com/joule-profiler/joule-profiler/) (v2.1.1), [Alumet](https://alumet.dev/) (v0.9.3) and [perf](https://man7.org/linux/man-pages/man1/perf-stat.1.html) (Linux kernel v6.12)
+If you want to reproduce the experiments, you need an Intel or AMD CPU with RAPL support and an Nvidia GPU supporting CUDA v11.8.
 
-You also need an Intel or AMD CPU with RAPL support and an Nvidia GPU supporting CUDA v11.8. 
+Also, you need to install [Joule Profiler](https://github.com/joule-profiler/joule-profiler/) (v2.1.1), [Alumet](https://alumet.dev/) (v0.9.3) and [perf](https://man7.org/linux/man-pages/man1/perf-stat.1.html) (Linux kernel v6.12)
 
 ### On Grid'5000
 
 If you want to reproduce the experiments on the **Grid'5000** testbed, here is how to borrow a node and deploy a custom environment:
 
-```
+```bash
 oarsub -p {cluster} -l host=1,walltime={time} "sleep 365d" -t deploy
 kadeploy3 -m {node} debian12-big
 ```
 
-We use debian12-big to have access to the NVIDIA open kernel modules and drivers pre-installed on the node.
+We use `debian12-big` to have access to the NVIDIA open kernel modules and drivers pre-installed on the node.
 
 ### Setup environment
 
@@ -52,11 +52,11 @@ There are several benchmark notebooks available in the `notebooks/` folder:
 - `parallel_nvml.py`: GPU parallel benchmark (NVML)
 - `sequential.py`: CPU sequential benchmark (RAPL)
 - `sequential_nvml.py`: GPU sequential benchmark (NVML)
-- `phases.py`: phase detection latency benchmark
-- `phases-stress.py`: phase detection latency benchmark under CPU stress
+- `phases.py`: phase detection delay benchmark
+- `phases-stress.py`: phase detection delay benchmark under CPU stress
 
 To run a notebook, do:
-```
+```bash
 scripts/run_notebook.sh notebooks/{notebook}
 ```
 
@@ -66,15 +66,18 @@ This step only requires `uv` to be installed (no Nix environment needed).
 
 The aggregated results are provided in the `data.zip` archive. The raw results are available for download [here](https://filesender.renater.fr/?s=download&token=5845fdda-1921-4352-933b-f12418e0194c).
 
-To aggregate raw results, run `prepare_data.py` to generate the aggregated dataset into the `results/` folder, then use `full_comparison.py` to visualize it.
+To aggregate the raw results, run:
+```bash
+uvx marimo edit notebooks/prepare_data.py
+```
 
 To visualize the results, run:
-```
+```bash
 uvx marimo edit notebooks/full_comparison.py
 ```
 
 ### Prerequisites
 
-- A **Grid'5000** account with access to Chirop or Chifflot cluster, or equivalent hardware
+- A **Grid'5000** account with access to Chirop or Chifflot cluster, or equivalent hardware (to execute on **Grid'5000**)
 - Nix (or run `install_nix.sh`)
-- `uv` for visualization only
+- `uv` for visualization only (if no Nix)
