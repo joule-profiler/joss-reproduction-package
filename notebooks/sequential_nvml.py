@@ -63,7 +63,7 @@ def _(
     tqdm,
     warmup,
 ):
-    _cmd = f"python3 programs/nbody-gpu.py 200"
+    _cmd = f"python3 programs/gpu.py 2000"
     _iterations = 2000
     _delay = 1
     _taskset = "2"
@@ -71,7 +71,7 @@ def _(
     os.makedirs(f"{RESULTS_DIR}/sequential_nvml/joule-profiler", exist_ok=True)
     os.makedirs(f"{RESULTS_DIR}/sequential_nvml/alumet", exist_ok=True)
 
-    warmup(cmd="python3 programs/nbody-gpu.py 200", taskset=_taskset, iter=10)
+    warmup(cmd=_cmd, taskset=_taskset, iter=10)
 
     for _i in tqdm.tqdm(range(_iterations)):
         _profiler_out = os.path.join(RESULTS_DIR, "sequential_nvml", "joule-profiler", f"iteration_{_i}.csv")

@@ -68,14 +68,14 @@ def _(
     os.makedirs(f"{RESULTS_DIR}/parallel_nvml/joule-profiler", exist_ok=True)
     os.makedirs(f"{RESULTS_DIR}/parallel_nvml/alumet", exist_ok=True)
 
-    warmup(cmd="python3 programs/nbody-gpu.py 100", taskset=_taskset, iter=10)
+    warmup(cmd="python3 programs/gpu.py 2000", taskset=_taskset, iter=10)
 
     for _i in tqdm.tqdm(range(_iterations), delay=_delay):
         _alumet_out = os.path.join(RESULTS_DIR, "parallel_nvml", "alumet", f"iteration_{_i}.csv")
         _profiler_out = os.path.join(RESULTS_DIR, "parallel_nvml", "joule-profiler", f"iteration_{_i}.csv")
 
         _cmd = "sleep 10"
-        _nbody_proc = subprocess.Popen(["taskset", "-c", _taskset, "python3", "programs/nbody-gpu.py", "2000"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        _nbody_proc = subprocess.Popen(["taskset", "-c", _taskset, "python3", "programs/gpu.py", "2000"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
         _runs = [
             ("joule-profiler", lambda: profiler_exec(_cmd, output_file=_profiler_out, profiler_path=PROFILER_PATH, taskset=_taskset, nvml=True, sockets=[SOCKET])),
